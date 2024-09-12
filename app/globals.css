@@ -9,8 +9,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #100b0b;
+    --foreground: #a6aba6;
   }
 }
 
@@ -18,10 +18,15 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+a {
+  display: block;
 }
