@@ -10,7 +10,6 @@ export default function Navigation({ navItems }: { navItems: NavItemsType[] }) {
     <>
       {navItems.map((link: NavItemsType) => {
         const isActive = pathname === link.href;
-        console.log(pathname, link.href);
         return (
           <Link
             key={link.label}
