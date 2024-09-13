@@ -13,27 +13,25 @@ export const metadata: Metadata = {
   title: 'Post',
 };
 
-async function getData(id: string) {
-  try {
-    const response = await fetch(
-      `https://jsonplaceholder.typicode.com/todos/${id}`
-    );
-    return response.json();
-  } catch {
-    throw new Error(`error load post`);
-  }
-}
+const getData = async (id: string) => {
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/posts/${id}`
+  );
+
+  if (!response.ok) throw new Error(`error load post`);
+  return response.json();
+};
 
 export default async function Post({ params: { id } }: PostProps) {
   const post: PostType = await getData(id);
-  if (!post) return;
+  if (!post) return <>Not found posts</>;
   return (
     <div className="text-center">
       <div className="bg-slate-700 m-2b [*&]:border">
         <span>{post.id}</span>
         <p>{post.title}</p>
         <p>{post.userId}</p>
-        <p>{post.completed ? 'Hurra' : 'Scheisse'}</p>
+        <p>{post.body}</p>
       </div>
     </div>
   );
