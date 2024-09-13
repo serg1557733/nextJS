@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { NavItemsType } from './NavLInks';
 import Link from 'next/link';

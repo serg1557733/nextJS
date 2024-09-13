@@ -14,6 +14,7 @@ export default function SearchPost() {
   return (
     <form onSubmit={handleSubmit}>
       <input
+        className="px-2 m-2"
         type="search"
         placeholder="search"
         value={search}

@@ -1,5 +1,3 @@
-'use client';
-
 import Navigation from './Navigation';
 
 export type NavItemsType = {

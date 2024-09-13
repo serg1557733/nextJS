@@ -25,7 +25,9 @@ export default function Posts() {
   return (
     <div className="text-center">
       <h1>Posts main page</h1>
-      <SearchPost />
+      <div className="mx-auto my-2 p-2 border w-fit ">
+        <SearchPost />
+      </div>
 
       {loading ? (
         <h2 className="bg-green-400 ">Loading</h2>
