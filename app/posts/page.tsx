@@ -3,17 +3,10 @@ import React from 'react';
 
 async function getData() {
   try {
-    const response = await fetch(
-      `https://jsonplaceholder.typicode.com/todos/`,
-      {
-        next: {
-          revalidate: 20,
-        },
-      }
-    );
+    const response = await fetch(`https://jsonplaceholder.typicode.com/todos/`);
     return response.json();
-  } catch (error) {
-    console.log(error);
+  } catch {
+    throw new Error(`error load post`);
   }
 }
 

@@ -16,21 +16,17 @@ export const metadata: Metadata = {
 async function getData(id: string) {
   try {
     const response = await fetch(
-      `https://jsonplaceholder.typicode.com/todos/${id}`,
-      {
-        next: {
-          revalidate: 20,
-        },
-      }
+      `https://jsonplaceholder.typicode.com/todos/${id}`
     );
     return response.json();
-  } catch (error) {
-    console.log(error);
+  } catch {
+    throw new Error(`error load post`);
   }
 }
 
 export default async function Post({ params: { id } }: PostProps) {
   const post: PostType = await getData(id);
+  if (!post) return;
   return (
     <div className="text-center">
       <div className="bg-slate-700 m-2b [*&]:border">
