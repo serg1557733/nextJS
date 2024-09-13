@@ -1,25 +1,14 @@
-import { PostType } from '@/app/posts/page';
+import { usePosts } from '@/store';
 import React, { useState } from 'react';
 
-type SearchProps = {
-  onSearch: (posts: PostType[]) => void;
-};
-
-async function getpostBySearch(search: string): Promise<PostType[]> {
-  const response = await fetch(
-    `https://jsonplaceholder.typicode.com/posts?q=${search}`
-  );
-  if (!response.ok) throw new Error(`error load post`);
-  return response.json();
-}
-
-export default function SearchPost({ onSearch }: SearchProps) {
+export default function SearchPost() {
   const [search, setSearch] = useState('');
+
+  const getPostBySearch = usePosts((state) => state.getPostBySearch);
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    const posts = await getpostBySearch(search);
-    onSearch(posts);
+    await getPostBySearch(search);
   };
 
   return (

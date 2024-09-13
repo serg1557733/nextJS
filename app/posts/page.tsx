@@ -2,13 +2,8 @@
 
 import SearchPost from '@/components/SearchPost';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-
-async function getData() {
-  const response = await fetch(`https://jsonplaceholder.typicode.com/posts`);
-  if (!response.ok) throw new Error(`error load post`);
-  return response.json();
-}
+import React, { useEffect } from 'react';
+import { usePosts } from '../../store/index';
 
 export type PostType = {
   userId: number;
@@ -18,22 +13,19 @@ export type PostType = {
 };
 
 export default function Posts() {
-  const [posts, setPosts] = useState<PostType[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  // const posts: PostType[] = getData();
-
-  console.log(posts);
+  const [posts, getAllPosts, loading] = usePosts((state) => [
+    state.posts,
+    state.getData,
+    state.loading,
+  ]);
 
   useEffect(() => {
-    getData()
-      .then(setPosts)
-      .finally(() => setLoading(false));
-  }, []);
+    getAllPosts();
+  }, [getAllPosts]);
   return (
     <div className="text-center">
       <h1>Posts main page</h1>
-      <SearchPost onSearch={setPosts} />
+      <SearchPost />
 
       {loading ? (
         <h2 className="bg-green-400 ">Loading</h2>
