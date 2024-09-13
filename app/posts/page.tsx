@@ -2,12 +2,9 @@ import Link from 'next/link';
 import React from 'react';
 
 async function getData() {
-  try {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/todos/`);
-    return response.json();
-  } catch {
-    throw new Error(`error load post`);
-  }
+  const response = await fetch(`https://jsonplaceholder.typicode.com/todos/`);
+  if (!response.ok) throw new Error(`error load post`);
+  return response.json();
 }
 
 export type PostType = {
